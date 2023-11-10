@@ -157,6 +157,7 @@ static void UserApp1SM_Idle(void)
 {
     static u16 u16BlinkCount = 0;
     static u8 u8Counter = 0;
+    static u8 u8colorIndex = 0;
     
     u16BlinkCount++;
     if(u16BlinkCount == 250){
@@ -165,6 +166,25 @@ static void UserApp1SM_Idle(void)
       if(u8Counter == 16){
         u8Counter = 0;
       }
+      
+      u8colorIndex++;
+      if(u8colorIndex == 7){
+        u8colorIndex = 0;
+      }
+      
+      switch(u8colorIndex){
+        case 0:
+          LedOn(LCD_RED);
+          LedOn(LCD_GREEN);
+          LedOn(LCD_BLUE);
+          break;
+          
+        case 1:
+          LedOn(LCD_RED);
+          LedOff(LCD_GREEN);
+      }
+       
+      
       
       if(u8Counter & 0x01){
         LedOn(RED);
